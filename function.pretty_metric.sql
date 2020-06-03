@@ -47,37 +47,37 @@ BEGIN
 END pretty_metric;
 
 /* SAMPLE USAGE */
-SELECT pretty_metric(p_number => 123456000000)                                         simple,
-       pretty_metric(p_number => 123456, p_round_to => 0.01, p_after => 'B')           bytes_decimal,
+SELECT pretty_metric(p_number => 123456000000)                                         simple, --123G
+       pretty_metric(p_number => 123456, p_round_to => 0.01, p_after => 'B')           bytes_decimal, --123.46KB
        pretty_metric(p_number   => 123456,
                      p_round_to => 0.01,
                      p_after    => 'bytes',
-                     p_scale    => 'si-long')                                          bytes_decimal_long,
-       pretty_metric(p_number => 123456, p_round_to => 0.01, p_scale => 'binary')      bytes_binary,
-       pretty_metric(p_number => 123456, p_round_to => 0.01, p_scale => 'Binary-Long') bytes_binary_long,
+                     p_scale    => 'si-long')                                          bytes_decimal_long, --123.46 kilobytes
+       pretty_metric(p_number => 123456, p_round_to => 0.01, p_scale => 'binary')      bytes_binary, --120.56KiB
+       pretty_metric(p_number => 123456, p_round_to => 0.01, p_scale => 'Binary-Long') bytes_binary_long, --120.56 Kibibytes
        pretty_metric(p_number   => 2543947000,
                      p_round_to => 0.1,
                      p_before   => '$',
-                     p_scale    => 'En-Us-Long')                                       english_long,
+                     p_scale    => 'En-Us-Long')                                       english_long, --$2.5 Billion
        pretty_metric(p_number   => 2543947000,
                      p_round_to => 0.1,
                      p_before   => '$',
-                     p_scale    => 'en-us')                                            english_short,
-       pretty_metric(p_number => 5000, p_round_to => 0.01, p_after => 'm')             distance_big,
-       pretty_metric(p_number => 0.0000025, p_round_to => 0.01, p_after => 'm')        distance_small,
+                     p_scale    => 'en-us')                                            english_short, --$2.5B
+       pretty_metric(p_number => 5000, p_round_to => 0.01, p_after => 'm')             distance_big, --5Km
+       pretty_metric(p_number => 0.0000025, p_round_to => 0.01, p_after => 'm')        distance_small, --2.5µm
        pretty_metric(p_number   => 0.0000000025,
                      p_round_to => 0.01,
                      p_after    => 'seconds',
-                     p_scale    => 'Si-Long')                                          seconds_long,
+                     p_scale    => 'Si-Long')                                          seconds_long, --2.5 Nanoseconds
        pretty_metric(p_number   => 0.0000000025,
                      p_round_to => 0.01,
                      p_after    => 's',
-                     p_scale    => 'si')                                               seconds_short,
-       pretty_metric(p_number => 128456789, p_rounding_type => 'None')                 unrounded,
-       pretty_metric(p_number => 128456789, p_rounding_type => 'C', p_round_to => 50)  ceiling_50,
-       pretty_metric(p_number => 128456789, p_round_to => 50)                          rounded_50,
+                     p_scale    => 'si')                                               seconds_short, --2.5ns
+       pretty_metric(p_number => 128456789, p_rounding_type => 'None')                 unrounded, --128.456789M
+       pretty_metric(p_number => 128456789, p_rounding_type => 'C', p_round_to => 50)  ceiling_50, --150M
+       pretty_metric(p_number => 128456789, p_round_to => 50)                          rounded_50, --150M
        pretty_metric(p_number        => 128456789,
                      p_rounding_type => 'F',
                      p_round_to      => 50,
-                     p_scale         => 'SI')                                          floor_50
+                     p_scale         => 'SI')                                          floor_50 --100M
   FROM DUAL;

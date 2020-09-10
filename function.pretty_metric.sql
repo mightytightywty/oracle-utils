@@ -13,7 +13,7 @@ BEGIN
         l_divisor := 1024; --1024 bytes in a KiB
     END IF;
 
-    l_magnitude := FLOOR(LOG(l_divisor, p_number));
+    l_magnitude := COALESCE(FLOOR(LOG(l_divisor, NULLIF(p_number, 0))), 0);
     l_suffix    := APEX_UTIL.string_to_table(CASE UPPER(TRIM(p_scale))
                                                  WHEN 'SI' THEN 'y,z,a,f,p,n,µ,m,,K,M,G,T,P,E,Z,Y'
                                                  WHEN 'SI-LONG' THEN 'yocto,zepto,atto,femto,pico,nano,micro,milli,,kilo,mega,giga,tera,peta,exa,zetta,yotta'
